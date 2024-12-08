@@ -1,0 +1,33 @@
+# 编译
+FROM rust:alpine3.21 AS builder
+
+# 安装依赖包
+RUN apk add git musl-dev curl pkgconfig openssl-dev openssl-libs-static
+# 拉取源码，并切换到 v4.0.4 版本
+RUN git clone https://github.com/Power2All/torrust-actix.git /tmp/torrust-actix
+RUN cd /tmp/torrust-actix && git checkout tags/v4.0.4
+# 开始编译
+WORKDIR /tmp/torrust-actix
+RUN cd /tmp/torrust-actix
+RUN cargo build --release
+# 创建默认配置文件 config.toml
+WORKDIR /tmp/torrust-actix/target/release
+RUN ./torrust-actix --create-config || true
+
+# 构建
+FROM alpine:3.21
+
+# 创建工作目录 /app
+RUN mkdir -p /app
+# 工作目录 /app
+WORKDIR /app
+# 从构建镜像复制文件到 /torrust-actix 目录
+COPY --from=builder /tmp/torrust-actix/target/release/torrust-actix /app/torrust-actix
+COPY --from=builder /tmp/torrust-actix/target/release/config.toml /app/config.toml
+
+# 对外暴露端口
+EXPOSE 6969/tcp
+EXPOSE 6969/udp
+EXPOSE 8080/tcp
+# 镜像运行命令
+CMD cd /app && ./torrust-actix
