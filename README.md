@@ -32,10 +32,10 @@ torrust-actix在运行时需要一个在相同目录下的配置文件，本镜�
 
 ```bash
 docker run -itd --name torrust-actix \
---restart=unless-unstopped
--p 6969:6969/tcp
--p 6969:6969/udp
--p 8080:8080/tcp
+--restart=unless-unstopped \
+-p 6969:6969/tcp \
+-p 6969:6969/udp \
+-p 8080:8080/tcp \
 ryjer/torrust-actix:alpine
 ```
 
