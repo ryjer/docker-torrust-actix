@@ -52,13 +52,13 @@ jobs:
         with:
           context: .
           file: Dockerfile.alpine
-          #platforms: linux/amd64,linux/arm64
-          platforms: linux/amd64
+          platforms: linux/amd64,linux/arm64
+          #platforms: linux/amd64
           push: true
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
           tags: |
-            ryjer/torrust-actix:v4.0.6
+            ryjer/torrust-actix:v4.0.7
             ryjer/torrust-actix:alpine
             ryjer/torrust-actix:latest
       
