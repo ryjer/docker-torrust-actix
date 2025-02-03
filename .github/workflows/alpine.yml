@@ -58,7 +58,7 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
           tags: |
-            ryjer/torrust-actix:v4.0.5
+            ryjer/torrust-actix:v4.0.6
             ryjer/torrust-actix:alpine
             ryjer/torrust-actix:latest
       
