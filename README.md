@@ -8,7 +8,29 @@ use torrust-actix tracker server in docker / container
 
 torrust-actix是一个衍生自torrust项目的公共BT tracker 服务器。其使用rust语言编写，并且提供了即用的windows可执行文件、源码和docker镜像。
 
-但是官方项目提供的docker镜像说明不足。这里提供一个可以立即使用的docker镜像
+官方项目提供的docker镜像是一个现场编译的镜像，需要等待漫长的rust编译过程后才能运行。这里提供一个可以立即使用的docker镜像。
+
+## 兼容性
+
+根据个人使用收集，以下是torrust-actix镜像版本与Linux系统内核的兼容信息
+
+```bash
+#镜像版本    发行版   内核版本   兼容性
+v4.0.4  debian12   6.1   长期稳定
+v4.0.7  debain12   6.1   长期稳定
+
+v4.0.4  rockylinux9   5.14   不稳定
+v4.0.5  rockylinux9   5.14   不稳定
+v4.0.6  rockylinux9   5.14   不稳定
+v4.0.7  rockylinux9   5.14   系统死机  
+```
+
+为了进行长期稳定性测试，希望大家可以使用我搭建的tracker测试服务器来提供真实的服务环境。对应的tracker服务链接如下，欢迎大家添加使用
+
+```bash
+http://tracker.netmap.top:6969/announce
+udp://tracker.netmap.top:6969/announce
+```
 
 ## 下载
 
@@ -72,4 +94,8 @@ services:
 docker compose -f torrust-actix-compose.yaml up -d
 ```
 
+启动完成后，通过容器的日志查看运行情况
 
+```bash
+docker logs torrust-actix
+```
