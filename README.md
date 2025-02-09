@@ -25,7 +25,7 @@ v4.0.6  rockylinux9   5.14   不稳定
 v4.0.7  rockylinux9   5.14   系统死机  
 ```
 
-为了进行长期稳定性测试，希望大家可以使用我搭建的tracker测试服务器来提供真实的服务环境。对应的tracker服务链接如下，欢迎大家添加使用
+为了进行长期稳定性测试，希望大家使用我搭建的tracker测试服务器来提供真实的运行环境。对应的tracker服务链接如下，欢迎大家添加使用
 
 ```bash
 http://tracker.netmap.top:6969/announce
@@ -37,7 +37,7 @@ udp://tracker.netmap.top:6969/announce
 默认会基于alpine构建镜像，你可以使用以下命令拉取镜像
 
 ```bash
-docker pull ryjer/torrust-actix:alpine
+docker pull ryjer/torrust-actix:latest
 ```
 
 ## 镜像说明
@@ -58,7 +58,7 @@ docker run -itd --name torrust-actix \
 -p 6969:6969/tcp \
 -p 6969:6969/udp \
 -p 8080:8080/tcp \
-ryjer/torrust-actix:alpine
+ryjer/torrust-actix:latest
 ```
 
 也可以使用以下compose文件，将其命名为`torrust-actix-compose.yaml`
@@ -68,7 +68,7 @@ version: '3.5'
 
 services:
   tracker:
-    image: ryjer/torrust-actix:alpine
+    image: ryjer/torrust-actix:latest
     container_name: torrust-actix
     restart: unless-stopped
     environment:
