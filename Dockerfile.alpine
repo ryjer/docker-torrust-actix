@@ -1,11 +1,11 @@
 # 编译
-FROM rust:alpine AS builder
+FROM rust:alpine3.21 AS builder
 
 # 安装依赖包
 RUN apk add git musl-dev curl pkgconfig openssl-dev openssl-libs-static
-# 拉取源码，并切换到 v4.0.7 版本
+# 拉取源码，并切换到 v4.0.8 版本
 RUN git clone https://github.com/Power2All/torrust-actix.git /tmp/torrust-actix
-RUN cd /tmp/torrust-actix && git checkout tags/v4.0.7
+RUN cd /tmp/torrust-actix && git checkout tags/v4.0.8
 # 开始编译
 WORKDIR /tmp/torrust-actix
 RUN cd /tmp/torrust-actix
